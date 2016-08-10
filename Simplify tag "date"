@@ -1,0 +1,16 @@
+// This script replaces Date format from YYYY-MM-DD --> YYYY;
+
+using Metatogger.Data;
+
+string NewValue(string oldValue)
+{
+	int index = oldValue.IndexOf('-');
+	return index == -1 ? oldValue : oldValue.Substring(0, index);	
+}
+
+foreach	(var file in files)
+{
+	string Date = file.GetFirstValue(TagName.Date);
+	if (Date!= null)
+		file.SetTag(TagName.Date, NewValue(Date));
+}
